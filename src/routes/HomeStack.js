@@ -8,7 +8,11 @@ export default function HomeStack() {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+    >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Repository" component={Repository} />
     </Stack.Navigator>
