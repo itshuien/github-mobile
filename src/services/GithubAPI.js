@@ -9,9 +9,18 @@ export const getOrganization = async name => {
   }
 }
 
-export const getRepositories = async (organization) => {
+export const getRepositories = async organization => {
   try {
     const { data } = await axios.get(`https://api.github.com/orgs/${organization}/repos`);
+    return data;
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+export const getRepoLanguages = async repoFullName => {
+  try {
+    const { data } = await axios.get(`https://api.github.com/repos/${repoFullName}/languages`);
     return data;
   } catch(e) {
     console.error(e);
