@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { fetchOrganization, fetchRepositories } from '../actions';
+
+import SearchInput from '../components/SearchInput';
 
 export default function Home({ navigation }) {
   const dispatch = useDispatch();
@@ -38,13 +40,7 @@ export default function Home({ navigation }) {
         </View>
       </View>
 
-      <TextInput
-        value={searchKeyword}
-        onChangeText={value => setSearchKeyword(value)}
-        placeholder="Search repositories by name"
-        autoCapitalize="none"
-        style={styles.searchInput}
-      />
+      <SearchInput searchKeyword={searchKeyword} onChangeText={value => setSearchKeyword(value)} />
 
       <FlatList
         data={filteredRepos}
@@ -72,14 +68,6 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: 8,
     marginRight: 16,
-  },
-  searchInput: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    marginBottom: 16,
-    marginHorizontal: 16,
-    padding: 8,
-    borderRadius: 8,
   },
   flatList: {
     paddingHorizontal: 16,
