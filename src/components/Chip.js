@@ -3,12 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default function Chip({ icon, text, value, backgroundColor, width }) {
   return (
-    <View style={{ ...styles.chip, backgroundColor, width }}>
+    <View style={{ ...styles.chip, width }}>
       <View style={styles.titleContainer}>
         <View style={styles.titleIcon}>{icon}</View>
         <Text style={styles.titleText}>{text}</Text>
       </View>
-      <View style={styles.valueContainer}>
+      <View style={{ ...styles.valueContainer, backgroundColor }}>
         <Text style={styles.valueText}>{value}</Text>
       </View>
     </View>
@@ -17,6 +17,7 @@ export default function Chip({ icon, text, value, backgroundColor, width }) {
 
 const styles = StyleSheet.create({
   chip: {
+    backgroundColor: '#fcfcfc',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -36,7 +37,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   valueContainer: {
-    backgroundColor: '#fff',
     borderRadius: 24,
     minWidth: 24,
     paddingVertical: 4,

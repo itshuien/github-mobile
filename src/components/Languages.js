@@ -8,6 +8,10 @@ export default function Languages({ repoFullName }) {
   const [languages, setLanguages] = useState({});
   const [totalBytes, setTotalBytes] = useState(0);
 
+  const getLanguageColor = language => {
+    return languageColors[language].original || languageColors.Other.original;
+  }
+
   const getLanguages = async () => {
     const data = await getRepoLanguages(repoFullName);
     setLanguages(data);
@@ -24,23 +28,28 @@ export default function Languages({ repoFullName }) {
 
   return (
     <View>
-      <Text style={styles.title}>Languages</Text>
-
-      {!Object.keys(languages).length ? <Text style={{ fontSize: 12, color: '#aaa' }}>No languages used</Text> : null}
+      {!Object.keys(languages)?.length ? <Text style={styles.notFoundText}>No languages used</Text> : null}
 
       <View style={styles.languageBar}>
         {Object.entries(languages).map(([language, value]) => (
           <View
             key={language}
-            style={{ ...styles.languageBarFill, width: `${value/totalBytes * 100}%`, backgroundColor: languageColors[language] || languageColors.Other }}
+            style={{
+              ...styles.languageBarFill,
+              width: `${value/totalBytes * 100}%`,
+              backgroundColor: getLanguageColor(language)
+            }}
           />
         ))}
       </View>
 
-      <View style={{ marginBottom: 16 }}>
+      <View style={styles.list}>
         {Object.entries(languages).map(([language, value]) => (
-          <View key={language} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-            <View style={{ ...styles.dot, backgroundColor: languageColors[language] || languageColors.Other }} />
+          <View key={language} style={styles.listItem}>
+            <View style={{
+              ...styles.bullet,
+              backgroundColor: getLanguageColor(language)
+            }} />
             <Text>{language}: {(value/totalBytes * 100).toFixed(1)}%</Text>
           </View>
         ))}
@@ -54,11 +63,10 @@ const styles = StyleSheet.create({
     color: '#666',
     fontSize: 14,
     fontWeight: Platform.OS === 'ios' ? '500' : 'bold',
-    marginTop: 24,
     marginBottom: 16,
   },
   languageBar: {
-    height: 10,
+    height: 16,
     flexDirection: 'row',
     marginBottom: 16,
     borderRadius: 8,
@@ -68,10 +76,22 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  dot: {
-    width: 8,
-    height: 8,
+  bullet: {
+    width: 12,
+    height: 12,
     borderRadius: 8,
     marginRight: 8,
+  },
+  list: {
+    paddingHorizontal: 4,
+  },
+  listItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  notFoundText: {
+    fontSize: 12,
+    color: '#aaa',
   }
 })
