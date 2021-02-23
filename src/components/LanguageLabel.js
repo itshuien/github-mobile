@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { languageColors } from '../constants';
+import { LANGUAGE_COLORS } from '../constants';
 
 export default function LanguageLabel({ language }) {
   return (
     <View style={styles.container}>
-      <View style={{ ...styles.label, backgroundColor: languageColors[language]?.light || languageColors.Other.light }}>
+      <View style={{ ...styles.label, backgroundColor: LANGUAGE_COLORS[language]?.light || LANGUAGE_COLORS.Other.light }}>
         <Text style={{ ...styles.text }}>{language}</Text>
       </View>
     </View>

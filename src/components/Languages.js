@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 
 import { getRepoLanguages } from '../services/GithubAPI';
-import { languageColors } from '../constants';
+import { LANGUAGE_COLORS } from '../constants';
 
 export default function Languages({ repoFullName }) {
   const [languages, setLanguages] = useState({});
   const [totalBytes, setTotalBytes] = useState(0);
 
   const getLanguageColor = language => {
-    return languageColors[language].original || languageColors.Other.original;
+    return LANGUAGE_COLORS[language]?.original || LANGUAGE_COLORS.Other.original;
   }
 
   const getLanguages = async () => {

@@ -1,4 +1,4 @@
-export const languageColors = {
+export const LANGUAGE_COLORS = {
   'Batchfile'   : { original: '#C1F22D', light: '#e7f5bc' },
   'C'           : { original: '#555555', light: '#d9d7d7' },
   'C++'         : { original: '#F34B7D', light: '#fce8ef' },
@@ -10,8 +10,9 @@ export const languageColors = {
   'Kotlin'      : { original: '#F08E33', light: '#f5d8bc' },
   'M4'          : { original: '#CCCCCC', light: '#e3e3e3' },
   'Objective-C' : { original: '#448EFF', light: '#cce0ff' },
-  'Other'       : { original: '#ededed', light: '#ededed' },
+  'Other'       : { original: '#bbbbbb', light: '#ededed' },
   'Perl'        : { original: '#0398C3', light: '#b9e2ed' },
+  'PHP'         : { original: '#4F5D95', light: '#c8cde3' },
   'Python'      : { original: '#3572A5', light: '#bad3e8' },
   'Ruby'        : { original: '#711417', light: '#ebc5c6' },
   'Shell'       : { original: '#89E050', light: '#e0f0d5' },
