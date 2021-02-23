@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { fetchOrganization, fetchRepositories } from '../actions';
 
 import SearchInput from '../components/SearchInput';
-import LanguageLabel from '../components/LanguageLabel';
+import RepositoryCard from '../components/RepositoryCard';
 
 export default function Home({ navigation }) {
   const dispatch = useDispatch();
@@ -41,7 +41,6 @@ export default function Home({ navigation }) {
             <Text style={{ fontSize: 12 }}>{organization.description}</Text>
           </View>
         </View>
-        
 
         <SearchInput searchKeyword={searchKeyword} onChangeText={value => setSearchKeyword(value)} />
 
@@ -50,11 +49,10 @@ export default function Home({ navigation }) {
         <FlatList
           data={filteredRepos}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate('Repository', { repository: item })} style={styles.listItem}>
-              <Text style={{ fontWeight: '700', marginBottom: 4 }}>{item.name}</Text>
-              <Text style={{ fontSize: 12 }}>{item.description}</Text>
-              {item.language ? <LanguageLabel language={item.language} /> : null}
-            </TouchableOpacity>
+            <RepositoryCard
+              repository={item}
+              onPress={() => navigation.navigate('Repository', { repository: item })}
+            />
           )}
           keyExtractor={item => item.id.toString()}
           style={styles.flatList}
@@ -87,10 +85,4 @@ const styles = StyleSheet.create({
   flatList: {
     paddingHorizontal: 16,
   },
-  listItem: {
-    backgroundColor: '#fcfcfc',
-    padding: 16,
-    marginBottom: 8,
-    borderRadius: 8,
-  }
 })
