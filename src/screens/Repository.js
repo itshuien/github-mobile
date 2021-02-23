@@ -3,6 +3,8 @@ import { StyleSheet, StatusBar, Text, View, Platform, ScrollView } from 'react-n
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AntDesign } from '@expo/vector-icons';
 
+import { THEME_COLOR } from '../constants';
+
 import BackButton from '../components/BackButton';
 import HorizontalLine from '../components/HorizontalLine';
 import Chip from '../components/Chip';
@@ -75,7 +77,7 @@ export default function Repository({ route, navigation }) {
 
 const styles = StyleSheet.create({
   topContainer: {
-    backgroundColor: '#111A29',
+    backgroundColor: THEME_COLOR.backgroundDark,
     paddingHorizontal: 16,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
@@ -84,13 +86,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   organization: {
-    color: '#DB1D5E',
+    color: THEME_COLOR.secondary,
     fontSize: 14,
     fontWeight: '500',
     marginBottom: 4,
   },
   name: {
-    color: '#02A9F4',
+    color: THEME_COLOR.primary,
     fontSize: 20,
     fontWeight: '700',
     marginBottom: 16,

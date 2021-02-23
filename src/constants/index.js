@@ -1,3 +1,11 @@
+export const ORGANIZATION_NAME = 'react-native-community';
+
+export const THEME_COLOR = {
+  primary: '#02A9F4',
+  secondary: '#DB1D5E',
+  backgroundDark: '#111A29',
+}
+
 export const LANGUAGE_COLORS = {
   'Batchfile'   : { original: '#C1F22D', light: '#e7f5bc' },
   'C'           : { original: '#555555', light: '#d9d7d7' },

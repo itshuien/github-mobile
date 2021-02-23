@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { fetchOrganization, fetchRepositories } from '../actions';
+import { ORGANIZATION_NAME } from '../constants';
 
 import SearchInput from '../components/SearchInput';
 import RepositoryCard from '../components/RepositoryCard';
@@ -18,8 +19,8 @@ export default function Home({ navigation }) {
   const [filteredRepos, setFilteredRepos] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchOrganization('react-native-community'));
-    dispatch(fetchRepositories('react-native-community'));
+    dispatch(fetchOrganization(ORGANIZATION_NAME));
+    dispatch(fetchRepositories(ORGANIZATION_NAME));
   }, []);
 
   useEffect(() => {
