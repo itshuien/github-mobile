@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { fetchOrganization, fetchRepositories } from '../actions';
 
 import SearchInput from '../components/SearchInput';
+import LanguageLabel from '../components/LanguageLabel';
 
 export default function Home({ navigation }) {
   const dispatch = useDispatch();
@@ -42,12 +43,15 @@ export default function Home({ navigation }) {
 
       <SearchInput searchKeyword={searchKeyword} onChangeText={value => setSearchKeyword(value)} />
 
+      {searchKeyword.length ? <Text style={styles.searchResultInfo}>{filteredRepos.length} repositories found</Text> : null}
+
       <FlatList
         data={filteredRepos}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => navigation.navigate('Repository', { repository: item })} style={styles.listItem}>
             <Text style={{ fontWeight: '700', marginBottom: 4 }}>{item.name}</Text>
             <Text style={{ fontSize: 12 }}>{item.description}</Text>
+            {item.language ? <LanguageLabel language={item.language} /> : null}
           </TouchableOpacity>
         )}
         keyExtractor={item => item.id.toString()}
@@ -68,6 +72,13 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: 8,
     marginRight: 16,
+  },
+  searchResultInfo: {
+    marginHorizontal: 16,
+    marginBottom: 16,
+    fontSize: 12,
+    color: '#aaa',
+    textAlign: 'center',
   },
   flatList: {
     paddingHorizontal: 16,
