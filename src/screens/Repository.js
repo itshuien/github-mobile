@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, StatusBar, Text, View, Platform, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AntDesign } from '@expo/vector-icons';
 
-import { THEME_COLOR } from '../constants';
+import { getRepoWatchers } from '../services/GithubAPI';
+import { ORGANIZATION_NAME, THEME_COLOR } from '../constants';
 
 import BackButton from '../components/BackButton';
 import HorizontalLine from '../components/HorizontalLine';
@@ -12,6 +13,17 @@ import Languages from '../components/Languages';
 
 export default function Repository({ route, navigation }) {
   const { repository } = route.params;
+
+  const [watchers, setWatchers] = useState([]);
+
+  const getWatchers = async () => {
+    const data = await getRepoWatchers(ORGANIZATION_NAME, repository.name);
+    setWatchers(data);
+  }
+
+  useEffect(() => {
+    getWatchers();
+  }, [repository]);
 
   return (
     <>
@@ -41,7 +53,7 @@ export default function Repository({ route, navigation }) {
             <Chip
               icon={<AntDesign name="eye" size={16} color="#e3820b" />}
               text="Watchers"
-              value={repository.watchers_count}
+              value={watchers.length}
               backgroundColor="#fae4c8"
               width="48%"
             />
