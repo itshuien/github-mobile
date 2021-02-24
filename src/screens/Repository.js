@@ -51,7 +51,7 @@ export default function Repository({ route, navigation }) {
             <Chip
               icon={<AntDesign name="exclamationcircleo" size={16} color="#1ea61e" />}
               text="Open Issues"
-              value={repository.forks_count}
+              value={repository.open_issues_count}
               backgroundColor="#d2f0c5"
               width="48%"
             />
